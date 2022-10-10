@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "Build done for dummy-2"'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo "Test done for dummy-2"'
+            }
+        }
+        stage('Deliver') { 
+            steps {
+                sh 'echo "Delivery done for dummy-2"'
+            }
+        }
+    }
+}
