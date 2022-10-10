@@ -3,22 +3,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh 'echo "Build done for node"'
             }
         }
         stage('Test') {
             steps {
-                sh 'npm config set fetch-retry-mintimeout 20000'
-                sh 'npm config set fetch-retry-maxtimeout 120000'
-                sh 'npm update --force --verbose'
-                sh './jenkins/scripts/test.sh'
+                sh 'echo "Test done for node"'
             }
         }
         stage('Deliver') { 
             steps {
-                sh './jenkins/scripts/deliver.sh' 
-                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
-                sh './jenkins/scripts/kill.sh' 
+                sh 'echo "Delivery done for node"'
             }
         }
     }
