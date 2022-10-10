@@ -1,6 +1,7 @@
 pipeline {
     agent {
         docker {
+            sh 'cd ./simple-node-js-react-npm-app-wtih-jenkins'
             image 'node:lts-buster-slim'
             args '-p 5051:5051'
         }
@@ -8,6 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'cd ./simple-node-js-react-npm-app-wtih-jenkins'
                 sh 'pwd'
                 sh 'ls $pwd'
             }
