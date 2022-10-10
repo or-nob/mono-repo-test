@@ -6,7 +6,8 @@ pipeline {
             steps {
                 dir('project-dummy-1') {
                     script {
-                        def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep project-dummy-1 | wc -l").trim()
+                        // def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep project-dummy-1 | wc -l").trim()
+                        def strCount = "1"
                         if(strCount=="0") {
                             echo "Skipping build no files updated"
                             CONTINUE_BUILD = false
