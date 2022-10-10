@@ -18,16 +18,25 @@ pipeline {
         }
 
         stage('Build') {
+            when {
+                expression { CONTINUE_BUILD == true }
+            }
             steps {
                 sh 'echo "Build done for dummy-2"'
             }
         }
         stage('Test') {
+            when {
+                expression { CONTINUE_BUILD == true }
+            }
             steps {
                 sh 'echo "Test done for dummy-2"'
             }
         }
         stage('Deliver') { 
+            when {
+                expression { CONTINUE_BUILD == true }
+            }
             steps {
                 sh 'echo "Delivery done for dummy-2"'
             }
