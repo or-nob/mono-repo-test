@@ -11,7 +11,7 @@ pipeline {
                             echo "Skipping build no files updated"
                             CONTINUE_BUILD = false
                         } else {
-                            echo "Changes found in the dummy-1 module"
+                            echo "Changes found in dummy-1 module"
                         }
                     }
                 }
