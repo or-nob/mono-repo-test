@@ -1,3 +1,4 @@
+def CONTINUE_BUILD = true
 pipeline {
     agent any
     stages {
