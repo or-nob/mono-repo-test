@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Validation') {
             steps {
-                dir('simple-node-js-react-npm-app-wtih-jenkins') {
+                dir('project-dummy-1') {
                     script {
-                        def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep simple-node-js-react-npm-app-wtih-jenkins | wc -l").trim()
+                        def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep project-dummy-1 | wc -l").trim()
                         if(strCount=="0") {
                             echo "Skipping build no files updated"
                             CONTINUE_BUILD = false
                         } else {
-                            echo "Changes found in the node module"
+                            echo "Changes found in the dummy-1 module"
                         }
                     }
                 }
@@ -23,7 +23,7 @@ pipeline {
                 expression { CONTINUE_BUILD == true }
             }
             steps {
-                sh 'echo "Build done for node"'
+                sh 'echo "Build done for dummy-1"'
             }
         }
         stage('Test') {
@@ -31,7 +31,7 @@ pipeline {
                 expression { CONTINUE_BUILD == true }
             }
             steps {
-                sh 'echo "Test done for node"'
+                sh 'echo "Test done for dummy-1"'
             }
         }
         stage('Deliver') { 
@@ -39,7 +39,7 @@ pipeline {
                 expression { CONTINUE_BUILD == true }
             }
             steps {
-                sh 'echo "Delivery done for node"'
+                sh 'echo "Delivery done for dummy-1"'
             }
         }
     }
