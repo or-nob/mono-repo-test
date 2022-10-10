@@ -1,6 +1,22 @@
 pipeline {
     agent any
     stages {
+        stage('Validation') {
+            steps {
+                dir('project-dummy-2') {
+                    script {
+                        def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep project-dummy-2 | wc -l").trim()
+                        if(strCount=="0") {
+                            echo "Skipping build no files updated"
+                            CONTINUE_BUILD = false
+                        } else {
+                            echo "Changes found in the servicelayer module"
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'echo "Build done for dummy-2"'

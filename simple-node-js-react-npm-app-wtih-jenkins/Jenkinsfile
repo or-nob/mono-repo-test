@@ -1,6 +1,22 @@
 pipeline {
     agent any
     stages {
+        stage('Validation') {
+            steps {
+                dir('simple-node-js-react-npm-app-wtih-jenkins') {
+                    script {
+                        def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep simple-node-js-react-npm-app-wtih-jenkins | wc -l").trim()
+                        if(strCount=="0") {
+                            echo "Skipping build no files updated"
+                            CONTINUE_BUILD = false
+                        } else {
+                            echo "Changes found in the servicelayer module"
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'echo "Build done for node"'
